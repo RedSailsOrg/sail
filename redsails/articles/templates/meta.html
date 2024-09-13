@@ -1,0 +1,6 @@
+{% load article_tags %}
+<meta property="og:title" content="{{ title | no_tags | safe }}">
+<meta property="og:description" content="{{ description | no_tags | safe }}">
+<meta property="og:image" content="https://redsails.org{{ image }}">
+<meta property="og:url" content="{{ request.path | with_host | safe }}">
+<meta name="twitter:card" content="summary_large_image">

@@ -1,0 +1,9 @@
+lab.redsails.org {
+
+    handle_errors {
+        respond "{err.status_code} {err.status_text}"
+    }
+
+    reverse_proxy server:8000
+
+}

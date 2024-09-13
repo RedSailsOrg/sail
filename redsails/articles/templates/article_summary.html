@@ -1,0 +1,8 @@
+{% load article_tags %}
+<article id="{{ article.slug }}">
+{% include 'article_header.html' %}
+<p>
+<span>{{ article.summary | safe }}</span>
+<a href="{{ article.slug | localize_url:language }}"><nobr>[{{ 'read_more' | translate:language }}]</nobr></a>
+</p>
+</article>

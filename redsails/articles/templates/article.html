@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% load article_tags %}
+
+{% block main %}
+<article id="{{ article.slug }}">
+{% include 'article_header.html' %}
+<div class="article-content">{{ article.body | render:article | safe }}</div>
+</article>
+{% endblock %}

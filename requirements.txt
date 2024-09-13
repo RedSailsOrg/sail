@@ -1,0 +1,13 @@
+uvicorn
+django
+daphne
+pytest-django
+psycopg2_binary
+dj-database-url
+django-debug-toolbar
+django-storages[s3]
+
+markdown
+pyyaml
+readtime
+latex2mathml

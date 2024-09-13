@@ -1,0 +1,17 @@
+services:
+
+  caddy:
+    image: caddy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+      - /data/caddy_data:/data/
+
+  server:
+    image: rsd
+    build: .
+    working_dir: /src/redsails
+    env_file: .env
+    command: uvicorn core.asgi:application --host=0.0.0.0

@@ -1,0 +1,72 @@
+{% load article_tags %}
+{% load static %}
+<header>
+  <div class="info">
+    {% spaceless %}
+    <span class="authors">
+      {% for author in article.ordered_authors %}
+      {% include '_author.html' %}
+      {% empty %}
+      <a class="author">N/A</a>
+      {% endfor %}
+    </span>
+    {% endspaceless %}
+    <time datetime="{{ article.write_date }}" class="source-date">{{ article.write_date }}</time>
+    {% if article.pub_date %}
+    <time pubdate datetime="{{ article.pub_date.isoformat }}" class="list-date">{{ article.pub_date.isoformat }}</time>
+    {% else %}
+    <span class="list-date">unlisted</span>
+    {% endif %}
+    <span class="share" style="font-size: 0;">
+      {% if article.extra.twitter %}
+      <a target="_blank" href="{{ article.extra.twitter }}" style="--bg: url(/static/twitter.svg);">Twitter</a>
+      {% endif %}
+      {% if render_extra_info %}
+      <a target="_blank" href="{{ article.source_url | localize_url:language }}" style="--bg: url(/static/code.svg);">Source</a>
+      {% if article.extra.image %}
+      <a target="_blank" href="{% get_media_prefix %}{{ article.cover_image }}" style="--bg: url(/static/photo.svg);">Cover</a>
+      {% endif %}
+      {% endif %}
+    </span>
+  </div>
+  {% if render_extra_info %}
+  <div class="extra">
+  {% if article.extra.original %}
+    <div>
+    <strong>{{ 'orig_pub' | translate:language }}{{ ':' | translate:language }}</strong>
+    {% if article.extra.original|get_host %}
+    <a target="_blank" href="{{ article.extra.original | safe }}">{{ article.extra.original | get_host }}</a>
+    {% else %}
+    <span>{{ article.extra.original | safe }}</span>
+    {% endif %}
+    </div>
+  {% endif %}
+  {% if article.extra.translators %}
+    <div>
+    <strong>{{ 'translation' | translate:language }}{{ ':' | translate:language }}</strong>
+    <span>{{ article.extra.translators | safe }}</span>
+    </div>
+  {% endif %}
+  {% if article.extra.editor %}
+    <div>
+    <strong>{{ 'editing' | translate:language }}{{ ':' | translate:language }}</strong>
+    <span>{{ article.extra.editor }}</span>
+    </div>
+  {% endif %}
+  </div>
+  {% endif %}
+  <h1 class="title">
+    <a href="{{ article.slug | localize_url:language }}">{{ article.title | safe }}&nbsp;({{ article.year }})</a>
+  </h1>
+  <div>
+  <i>{{ article.read_time }} {{ 'minutes' | translate:language }}</i>
+    {% for lang_code, lang_name in article.siblings %}
+    {% if forloop.first %}|{% endif %}
+    <a class="underline" href="{{ article.slug | localize_url:lang_code }}">{{ lang_name }}</a>
+    {% endfor %}
+    {% for category in article.categories.all %}
+    {% if forloop.first %}|{% endif %}
+    <a class="underline" href="{{ category.url | localize_url:language }}">{{ category.name | translate:language | safe }}</a>
+    {% endfor %}
+  </div>
+</header>

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load article_tags %}
+
+{% block main %}
+<table class="sitemap">
+{% for article in articles %}
+<tr class="n{{ forloop.counter }}">
+<td><nobr>{{ article.write_date | slice:"4" }}</nobr></td>
+<td><nobr>{% spaceless %}
+{% for author in article.ordered_authors %}
+{% include '_author.html' %}
+{% endfor %}
+{% endspaceless %}</nobr></td>
+<td class="right"><nobr>{{ article.read_time }} ⏲&#xFE0E;</nobr></td>
+<td>
+<nobr><a href="{{ article.url | localize_url:language }}">{{ article.title | jinja_truncate | safe }}</a></nobr>
+<nobr>{% spaceless %}
+{% for lang_code, lang_name in article.siblings %}{% if forloop.first %}({% endif %}<a class="crimson underline" href="{{ article.url | localize_url:lang_code }}">{{ lang_code }}</a>{% if forloop.last %}){% else %}, {% endif %}{% endfor %}
+{% endspaceless %}</nobr>
+</td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

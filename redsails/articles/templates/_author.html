@@ -1,0 +1,6 @@
+{% load article_tags %}
+{% if author.shorthand %}
+<a class="author" href="{{ author.url | localize_url:language }}">{{ author.name | translate:language }}</a>
+{% else %}
+<a class="author">{{ author.name | translate:language }}</a>
+{% endif %}

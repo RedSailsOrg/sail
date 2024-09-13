@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load article_tags %}
+
+{% block main %}
+<style>
+main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 1em;
+}
+main > div > * {
+    display: block;
+}
+</style>
+
+<div>
+<b>Navigation</b>
+<a class="crimson underline" href="/contact/">{{ 'Contact' | translate:language }}</a>
+<a class="crimson underline" href="{{ 'toc' | localize_url:language }}">{{ 'Map' | translate:language }}</a>
+<a class="crimson underline" href="/mission/">{{ 'Mission' | translate:language }}</a>
+<a class="crimson underline" href="{{ '/rss.xml' | localize_url:language }}">RSS</a>
+<hr style="visibility: hidden;">
+<b>{{ 'Languages' | translate:language }}</b>
+{% for language in languages %}
+<a class="crimson underline" href="{{ '' | localize_url:language.id }}">{{ language.name }}</a>
+{% endfor %}
+</div>
+
+<div>
+<b>{{ 'Categories' | translate:language }}</b>
+{% for category in categories %}
+{% if category.relevant_articles %}
+<a class="crimson underline" href="{{ category.url | localize_url:language }}">{{ category.name | safe }} ({{ category.relevant_articles | length }})</a>
+{% endif %}
+{% endfor %}
+</div>
+
+</div>
+{% endblock %}

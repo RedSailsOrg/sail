@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="13 10 68 65" >
+  <defs>
+    <g id="hammer">
+      <path d="M 0,0 l -4,23 h 12 v 12 h 7 v -12 H 26 V 0 Z" />
+    </g>
+    <g id="sickle">
+      <path d="m 0,0 c 0,10 70,30 60,-30 c -15,20 -30,30 -60,25 h -5 v 3 Z" />
+    </g>
+    <mask id="mask" fill="white" stroke="black" stroke-width="4" stroke-linecap="round">
+      <use href="#hammer" x="20" y="25"/>
+      <use href="#hammer" x="32" y="20"/>
+      <use href="#hammer" x="45" y="15"/>
+      <use href="#sickle" x="18" y="55"/>
+    </mask>
+  </defs>
+  <rect id="ship" x="13" y="10" width="68" height="65" fill="crimson" mask="url(#mask)" />
+</svg>

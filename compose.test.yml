@@ -1,0 +1,11 @@
+services:
+
+  server:
+    image: rsd
+    build: .
+    working_dir: /src/redsails
+    env_file: .env
+    volumes:
+      - .:/src/
+      - /Users/roderic/Developer/rs/src/:/data/src/  # used for comparisons
+      - /Users/roderic/Developer/rs/dst/:/data/dst/  # used for comparisons

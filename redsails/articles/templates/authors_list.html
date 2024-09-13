@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load article_tags %}
+
+{% block main %}
+<h1>Selected Authors</h1>
+
+<table>
+{% for author in authors %}
+<tr>
+    <td>
+        <a href="{{ author.image_url }}">
+            <img src="{{ author.image_url }}"
+                width="200" height="200"
+                style="object-fit: cover;" />
+        </a>
+    </td>
+    <td>
+        <a href="{{ author.url | localize_url:language }}">
+            <b>{{ author.name | translate:language }}</b>
+        </a>
+        <div>{{ author.birth_date.isoformat }}</div>
+        <div>{{ author.death_date.isoformat }}{{ author.death_age }}</div>
+    </td>
+</tr>
+{% endfor %}
+</table>
+
+{% endblock %}

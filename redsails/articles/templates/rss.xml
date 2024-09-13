@@ -1,0 +1,24 @@
+{% load article_tags %}
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+  <channel>
+    <atom:link href="{{ 'rss.xml' | localize_url:language | with_host }}" rel="self" type="application/rss+xml"/>
+    <link>{{ '' | localize_url:language | with_host }}</link>
+    <title>{{ title }}</title>
+    <description>{{ description | escape }}</description>
+    <lastBuildDate>{{ articles.first.pub_date | rfc }}</lastBuildDate>
+    <pubDate>{{ articles.first.pub_date | rfc }}</pubDate>
+    {% for article in articles %}
+    <item>
+      <title>{{ article.title | escape }}</title>
+      <description>{{ article.summary | escape }}</description>
+      <link>{{ article.slug | localize_url:language | with_host }}</link>
+      <guid isPermaLink="false">{{ '' | localize_url:language | with_host }}#{{ article.slug }}</guid>
+      {% for author in article.ordered_authors %}
+      <dc:creator>{{ author.name }}</dc:creator>
+      {% endfor %}
+      <pubDate>{{ article.pub_date | rfc }}</pubDate>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
